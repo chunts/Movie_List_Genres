@@ -43,7 +43,7 @@ genresName.classList.add('list-group')
 genresName.classList.add('myList')
 for (let i = 1; i < 20; i++) {
     genresName.innerHTML += `
-    <a href="#" class="list-group-item list-group-item-action" id="${i}">${movie_genres[i]}</a>
+        <a href="#" class="list-group-item list-group-item-action" id="${i}">${movie_genres[i]}</a>
     `
 }
 genres.appendChild(genresName)
@@ -60,11 +60,10 @@ let resultID = []
 function movieList(number) {
     resultID = []
     for (index in data) {
-        console.log(data[index]["title"])
-        console.log(data[index]["genres"])
+        //console.log(`title = ${data[index]["title"]} ;    genres = ${data[index]["genres"]}`)
         decideMovie(number, data[index]["id"], data[index]["genres"])
     }
-    console.log(resultID)
+    console.log(`resultID = ${resultID}`)
     displayDataList(resultID)
 }
 
@@ -79,20 +78,21 @@ function displayDataList(result) {
     let htmlContent = ''
     for (index in result) {
 
+        let id = result[index]-1
+
         htmlContent += `
             <div class="col-sm-3">
                 <div class="card mb-2">
-                    <img class="card-img-top " src="${POSTER_URL}${data[index]["image"]}" alt="Card image cap">
+                    <img class="card-img-top " src="${POSTER_URL}${data[id]["image"]}" alt="Card image cap">
                   
                     <div class="card-body">
-                        <h6 class="card-title">${data[index]["title"]}</h5>
+                        <h6 class="card-title">${data[id]["title"]}</h5>
                 
                         <!-- Genres -->
                         <div id="genres-span">
                 `
-        let genre = data[index]["genres"]
+        let genre = data[id]["genres"]
         for (index in genre) {
-            console.log(movie_genres[genre[index]])
             htmlContent += `
                 <span class="badge badge-light">${movie_genres[genre[index]]}</span>
                 `
